@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - lts/*
+
+install:
+  - npm install
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database reachhigh;'
+
+scripts: npm run test
+
+script:
+  - nyc --reporter=lcov npm run test
+
+after_script:
+  - npm run coverage
